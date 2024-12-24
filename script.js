@@ -1,12 +1,14 @@
-const num = 266219;
+let num = 266219;
+let strNum = String(num);
 result = 1;
-let strNum = num.toString;
-console.log(typeof strNum)
+console.log(strNum)
 for (let i = 0; i < strNum.length; i++) {
-    result *= +strNum[i];
+    result *= Number(strNum[i]);
+    
 }
 console.log(result);
-
+let degree = result ** 3;
+console.log(degree.substring(1, 2));
 
 
 
