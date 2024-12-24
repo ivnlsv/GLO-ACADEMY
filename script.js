@@ -22,6 +22,14 @@ let weekDaysArray = {
   en: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 };
 
-let days = weekDaysArray[lang] || []; 
+let days = weekDaysArray[lang]; 
 
 console.log(days);
+
+let namePerson = "Александр";
+let statusPerson = (namePerson === "Артем")
+    ? "Директор"
+    : (namePerson === "Александр")
+        ? "Преподаватель"
+        : "Студент";
+console.log(statusPerson); 
