@@ -1,11 +1,11 @@
 const num = 266219;
-prod = 1;
-let digits = String(num);
-for (let i = 0; i, digits.length; i++) { 
-    prod *= Number(digits[i]);
- 
+result = 1;
+let strNum = num.toString;
+console.log(typeof strNum)
+for (let i = 0; i < strNum.length; i++) {
+    result *= +strNum[i];
 }
-console.log(prod);
+console.log(result);
 
 
 
