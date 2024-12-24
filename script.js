@@ -9,6 +9,6 @@ let servicePrice1 = prompt("Сколько это будет стоить?");
 let service2 = prompt("Какой еще дополнительный тип услуги нужен?");
 let servicePrice2 = prompt("Сколько это будет стоить?");
 let fullPrice = screenPrice + servicePrice1 + servicePrice2;
-dealerPercent = (fullPrice * (rollback / 100));
-servicePercentPrice = fullPrice - dealerPercent;
-console.log(servicePercentPrice)
+let dealerPercent = (fullPrice * (rollback / 100));
+let servicePercentPrice = fullPrice - dealerPercent;
+console.log(Math.ceil(servicePercentPrice))
