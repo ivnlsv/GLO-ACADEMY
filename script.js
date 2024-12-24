@@ -8,7 +8,8 @@ for (let i = 0; i < strNum.length; i++) {
 }
 console.log(result);
 let degree = result ** 3;
-console.log(degree.substring(1, 2));
+let strDegree = String(degree);
+console.log(strDegree.substring(1, 2));
 
 
 
