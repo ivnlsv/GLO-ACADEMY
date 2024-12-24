@@ -1,8 +1,15 @@
-const title = '';
-const screens = '';
-const screenPrice = '';
-const rollback ='';
-const fullPrice ='';
-const adaptive = '';
-console.log('Это консоль');
-alert('Это алерт');
+const num = 266219;
+prod = 1;
+let digits = String(num);
+for (let i = 0; i, digits.length; i++) { 
+    prod *= Number(digits[i]);
+ 
+}
+console.log(prod);
+
+
+
+
+
+
+
