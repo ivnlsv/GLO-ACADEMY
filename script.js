@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 let title = prompt("Как называется ваш проект?");
 let screens = prompt("Какие типы экранов нужно разработать?");
 let screenPrice = +prompt("Сколько будет стоить данная работа?");
@@ -12,30 +12,38 @@ let servicePrice2 = +prompt("Сколько это будет стоить?");
 //let dealerPercent = (fullPriceMain * (rollback / 100));
 //let servicePercentPrice = fullPriceMain - dealerPercent;
 //console.log(Math.ceil(servicePercentPrice));
-/* switch (true) {  */
-/*     case fullPriceMain >= 30000: */
-/*         console.log("Даем скидку в 10%"); */
-/*         break; */
-/*     case fullPriceMain >= 15000 && fullPriceMain < 30000: */
-/*         console.log("Даем скидку в 5%"); */
-/*         break; */
-/*     case fullPriceMain > 0 && fullPriceMain < 15000: */
-/*             console.log("Скидка не предусмотрена"); */
-/*         break; */
-/*     case fullPriceMain <= 0: */
-/*             console.log("Что то пошло не так"); */
-/*         break; */
-/* } */
-const getAllServicePrices = function (servicePrice1, servicePrice2) { 
+
+const showTypeOf = function (variable) {
+  console.log(variable, typeof variable);
+};
+
+const getAllServicePrices = function (servicePrice1, servicePrice2) {
   return servicePrice1 + servicePrice2;
-}
+};
 let allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
 
-function getFullPrice(screenPrice, allServicePrices) { 
+function getFullPrice(screenPrice, allServicePrices) {
   return screenPrice + allServicePrices;
-} 
+}
 
 let fullPrice = getFullPrice(screenPrice, allServicePrices);
 
+const getRollbackMessage = function (price) {
+  if (price >= 30000) {
+    return "Даем скидку в 10%";
+  } else if (price >= 15000 && price < 30000) {
+    return "Даем скидку в 5%";
+  } else if (price > 0 && price < 15000) {
+    return "Скидка не предусмотрена";
+  } else {
+    return "Что то пошло не так";
+  }
+};
+
+showTypeOf(title);
+showTypeOf(screenPrice);
+showTypeOf(adaptive);
+
 console.log("Стоимость доп. услуг:" + " " + allServicePrices);
-console.log("Полная стоимость:" +  " " + fullPrice);
+console.log("Полная стоимость:" + " " + fullPrice);
+console.log(getRollbackMessage(fullPrice));
