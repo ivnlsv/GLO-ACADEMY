@@ -1,3 +1,4 @@
+'use strict'
 const title = "Lesson 2";
 const screens = "Простые, Сложные, Интерактивные";
 const screenPrice = 200;
@@ -10,7 +11,7 @@ console.log(typeof adaptive);
 console.log(screens.length);
 console.log("Стоимость  верстки экранов" + " " + screenPrice + " " + "рублей/ долларов/ гривен/ юани");
 console.log("Стоимость разработки сайта" + " " + fullPrice + " " + "рублей/ долларов/ гривен/ юани");
-screenLower = screens.toLowerCase()
+let screenLower = screens.toLowerCase()
 console.log(screenLower.split(", "));
-dealerPercent = (fullPrice * (rollback / 100));
+let dealerPercent = (fullPrice * (rollback / 100));
 console.log("Процент отката посреднику:" + " " + dealerPercent)
