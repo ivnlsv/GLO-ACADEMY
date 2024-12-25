@@ -39,11 +39,25 @@ const getRollbackMessage = function (price) {
     return "Что то пошло не так";
   }
 };
+ 
+function getTitle(input) { 
+  if (!input || input.trim() === "") { 
+    return "Название проекта отсутствует"
+  }
+  input = input.toLowerCase().trim()
+  return input[0].toUpperCase() + input.slice(1)
+} 
+
+function getServicePercentPrices(rollBack, totalPrice) {
+  let dealerPercent = (totalPrice * (rollBack / 100));
+  return totalPrice - dealerPercent 
+} 
 
 showTypeOf(title);
 showTypeOf(screenPrice);
 showTypeOf(adaptive);
+//console.log(getTitle(title));
+//console.log("Полная стоимость:" + " " + fullPrice);
 
-console.log("Стоимость доп. услуг:" + " " + allServicePrices);
-console.log("Полная стоимость:" + " " + fullPrice);
 console.log(getRollbackMessage(fullPrice));
+console.log("Стоимость за вычетом отката: " + " " + getServicePercentPrices(rollback, fullPrice));
