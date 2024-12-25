@@ -1,6 +1,6 @@
 let num = 266219;
 let strNum = String(num);
-result = 1;
+let result = 1;
 console.log(strNum)
 for (let i = 0; i < strNum.length; i++) {
     result *= Number(strNum[i]);
