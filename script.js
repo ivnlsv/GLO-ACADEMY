@@ -8,10 +8,6 @@ let service1 = prompt("Какой дополнительный тип услуг
 let servicePrice1 = +prompt("Сколько это будет стоить?");
 let service2 = prompt("Какой еще дополнительный тип услуги нужен?");
 let servicePrice2 = +prompt("Сколько это будет стоить?");
-//let fullPriceMain = screenPrice + servicePrice1 + servicePrice2;
-//let dealerPercent = (fullPriceMain * (rollback / 100));
-//let servicePercentPrice = fullPriceMain - dealerPercent;
-//console.log(Math.ceil(servicePercentPrice));
 
 const showTypeOf = function (variable) {
   console.log(variable, typeof variable);
@@ -39,25 +35,27 @@ const getRollbackMessage = function (price) {
     return "Что то пошло не так";
   }
 };
- 
-function getTitle(input) { 
-  if (!input || input.trim() === "") { 
-    return "Название проекта отсутствует"
+
+function getTitle(input) {
+  if (!input || input.trim() === "") {
+    return "Название проекта отсутствует";
   }
-  input = input.toLowerCase().trim()
-  return input[0].toUpperCase() + input.slice(1)
-} 
+  input = input.toLowerCase().trim();
+  return input[0].toUpperCase() + input.slice(1);
+}
 
 function getServicePercentPrices(rollBack, totalPrice) {
-  let dealerPercent = (totalPrice * (rollBack / 100));
-  return totalPrice - dealerPercent 
-} 
+  let dealerPercent = totalPrice * (rollBack / 100);
+  return totalPrice - dealerPercent;
+}
 
 showTypeOf(title);
 showTypeOf(screenPrice);
 showTypeOf(adaptive);
-//console.log(getTitle(title));
-//console.log("Полная стоимость:" + " " + fullPrice);
-
+console.log(screens);
 console.log(getRollbackMessage(fullPrice));
-console.log("Стоимость за вычетом отката: " + " " + getServicePercentPrices(rollback, fullPrice));
+console.log(
+  "Стоимость за вычетом отката: " +
+    " " +
+    getServicePercentPrices(rollback, fullPrice)
+);
