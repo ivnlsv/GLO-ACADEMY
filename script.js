@@ -1,25 +1,49 @@
 "use strict";
 let title = prompt("Как называется ваш проект?");
 let screens = prompt("Какие типы экранов нужно разработать?");
-let screenPrice = +prompt("Сколько будет стоить данная работа?");
 let adaptive = prompt("Нужен ли адаптив на сайте?");
 
+let screenPrice;
 let rollback = 10;
 let allServicePrices;
 let fullPrice;
 let servicePercentPrices;
 
-let service1 = prompt("Какой дополнительный тип услуги нужен?");
-let servicePrice1 = +prompt("Сколько это будет стоить?");
-let service2 = prompt("Какой еще дополнительный тип услуги нужен?");
-let servicePrice2 = +prompt("Сколько это будет стоить?");
+let service1;
+let servicePrice1;
+let service2;
+let servicePrice2;
 
 const showTypeOf = function (variable) {
   console.log(variable, typeof variable);
 };
 
+const getScreenPrice = function () {
+  do {
+    screenPrice = +prompt("Сколько будет стоить данная работа?");
+  } while (isNaN(screenPrice) || screenPrice <= 0 || screenPrice === "" || screenPrice === null);
+
+  return screenPrice;
+};
+
 const getAllServicePrices = function () {
-  return servicePrice1 + servicePrice2;
+  let sum = 0;
+  for (let i = 0; i < 2; i++) {
+    if (i === 0) {
+      service1 = prompt("Какой дополнительный тип услуги нужен?");
+    } else if (i === 1) {
+      service2 = prompt("Какой еще дополнительный тип услуги нужен?");
+    }
+    let price;
+    do {
+      price = prompt("Сколько это будет стоить?");
+      if (isNaN(price) || price === "" || price === null) {
+        alert("Введите число!");
+      }
+    } while (isNaN(price) || price === "" || price === null);
+    sum += +price;
+  }
+  return sum;
 };
 
 function getFullPrice() {
@@ -43,7 +67,7 @@ function getTitle() {
 }
 
 function getServicePercentPrices() {
-    return fullPrice - (fullPrice* (rollback / 100));
+  return fullPrice - fullPrice * (rollback / 100);
 }
 
 allServicePrices = getAllServicePrices();
@@ -57,4 +81,4 @@ showTypeOf(adaptive);
 
 console.log(screens);
 console.log(getRollbackMessage(fullPrice));
-console.log("Стоимость за вычетом отката: " +  " " + servicePercentPrices);
+console.log("Стоимость за вычетом отката: " + " " + servicePercentPrices);
