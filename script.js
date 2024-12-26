@@ -7,7 +7,7 @@ let adaptive = prompt("Нужен ли адаптив на сайте?");
 let rollback = 10;
 let allServicePrices;
 let fullPrice;
-let ServicePercentPrices;
+let servicePercentPrices;
 
 let service1 = prompt("Какой дополнительный тип услуги нужен?");
 let servicePrice1 = +prompt("Сколько это будет стоить?");
@@ -53,7 +53,7 @@ function getServicePercentPrices(rollBack, totalPrice) {
 
 allServicePrices = getAllServicePrices();
 fullPrice = getFullPrice();
-ServicePercentPrices = getServicePercentPrices();
+servicePercentPrices = getServicePercentPrices();
 title = getTitle();
 
 showTypeOf(title);
@@ -62,4 +62,4 @@ showTypeOf(adaptive);
 
 console.log(screens);
 console.log(getRollbackMessage(fullPrice));
-console.log("Стоимость за вычетом отката: " +  " " + ServicePercentPrices);
+console.log("Стоимость за вычетом отката: " +  " " + servicePercentPrices);
