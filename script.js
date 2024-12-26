@@ -69,7 +69,7 @@ function getTitle() {
 function getServicePercentPrices() {
   return fullPrice - fullPrice * (rollback / 100);
 }
-
+getScreenPrice();
 allServicePrices = getAllServicePrices();
 fullPrice = getFullPrice();
 servicePercentPrices = getServicePercentPrices();
