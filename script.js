@@ -18,11 +18,11 @@ const showTypeOf = function (variable) {
   console.log(variable, typeof variable);
 };
 
-const getAllServicePrices = function (servicePrice1, servicePrice2) {
+const getAllServicePrices = function () {
   return servicePrice1 + servicePrice2;
 };
 
-function getFullPrice(screenPrice, allServicePrices) {
+function getFullPrice() {
   return screenPrice + allServicePrices;
 }
 
@@ -38,17 +38,12 @@ const getRollbackMessage = function (price) {
   }
 };
 
-function getTitle(input) {
-  if (!input || input.trim() === "") {
-    return "Название проекта отсутствует";
-  }
-  input = input.toLowerCase().trim();
-  return input[0].toUpperCase() + input.slice(1);
+function getTitle() {
+  return title.trim()[0].toUpperCase() + title.trim().slice(1).toLowerCase();
 }
 
-function getServicePercentPrices(rollBack, totalPrice) {
-  let dealerPercent = totalPrice * (rollBack / 100);
-  return totalPrice - dealerPercent;
+function getServicePercentPrices() {
+    return fullPrice - (fullPrice* (rollback / 100));
 }
 
 allServicePrices = getAllServicePrices();
