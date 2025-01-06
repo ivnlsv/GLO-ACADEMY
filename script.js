@@ -14,8 +14,10 @@ function guessNumberBot() {
       guessNumber();
     } else if (userGuess > randomNum) {
       alert("Загаданное число меньше");
+      guessNumber();
     } else if (userGuess < randomNum) {
-      alert("Загаданное число меньше");
+      alert("Загаданное число больше");
+      guessNumber();
     } else {
       alert("Поздравляю, Вы угадали!!!");
     }
