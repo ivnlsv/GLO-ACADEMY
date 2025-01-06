@@ -1,12 +1,27 @@
 "use strict";
-let userInput = +prompt("Угадай число от 1 до 100");
-let randomNum = Math.floor(Math.random() * 100) + 1;
-console.log(randomNum);
-if (userInput > randomNum) {
-  alert("Загаданное число меньше");
-} else if (userInput < randomNum) {
-  alert("Загаданное число меньше");
-} else if (userInput === randomNum) { 
-  alert("Поздравляю, Вы угадали!!!");
-  
+
+function guessNumberBot() {
+  let randomNum = Math.floor(Math.random() * 100) + 1;
+  function guessNumber() {
+    const userInput = prompt("Угадай число от 1 до 100");
+    if (userInput === null) {
+      alert("Игра окончена");
+      return;
+    }
+    const userGuess = Number(userInput);
+    if (isNaN(userGuess)) {
+      alert("Введи число!");
+      guessNumber();
+    } else if (userGuess > randomNum) {
+      alert("Загаданное число меньше");
+    } else if (userGuess < randomNum) {
+      alert("Загаданное число меньше");
+    } else {
+      alert("Поздравляю, Вы угадали!!!");
+    }
+  }
+
+  guessNumber();
 }
+
+guessNumberBot();
