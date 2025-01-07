@@ -1,45 +1,46 @@
 "use strict";
 
 const appData = {
-  title: '',
-  screens: '',
+  title: "",
+  screens: "",
   adaptive: true,
   screenPrice: 0,
   rollback: 10,
   allServicePrices: 0,
   fullPrice: 0,
   servicePercentPrices: 0,
-  service1: '',
+  service1: "",
   servicePrice1: 0,
-  service2: '',
+  service2: "",
   servicePrice2: 0,
-  asking: function () { 
+  asking: function () {
     appData.title = prompt("Как называется ваш проект?");
     appData.screens = prompt("Какие типы экранов нужно разработать?");
-    do { 
+    do {
       appData.screenPrice = prompt("Сколько будет стоить данная работа?");
     } while (isNumber(appData.screenPrice));
     appData.adaptive = confirm("Нужен ли адаптив на сайте?");
-  }
-}
-const isNumber = function(num) { 
-  return !isNaN(parseFloat(num)) && isFinite(num)
-}
+  },
+};
+const isNumber = function (num) {
+  return !isNaN(parseFloat(num)) && isFinite(num);
+};
 
 const getAllServicePrices = function () {
   let sum = 0;
   for (let i = 0; i < 2; i++) {
+    let price = 0;
     if (i === 0) {
       appData.service1 = prompt("Какой дополнительный тип услуги нужен?");
     } else if (i === 1) {
       appData.service2 = prompt("Какой еще дополнительный тип услуги нужен?");
     }
-    let price;
+
     do {
       price = prompt("Сколько это будет стоить?");
-      if (isNaN(price) || price === "" || price === null) {
-        alert("Введите число!");
-      }
+      /* if (isNaN(price) || price === "" || price === null) { */
+      /*   alert("Введите число!"); */
+      /* } */
     } while (!isNumber(price));
     sum += +price;
   }
@@ -63,7 +64,10 @@ const getRollbackMessage = function (price) {
 };
 
 function getTitle() {
-  return appData.title.trim()[0].toUpperCase() + appData.title.trim().slice(1).toLowerCase();
+  return (
+    appData.title.trim()[0].toUpperCase() +
+    appData.title.trim().slice(1).toLowerCase()
+  );
 }
 
 function getServicePercentPrices() {
@@ -77,29 +81,3 @@ appData.title = getTitle();
 console.log(appData.fullPrice);
 console.log(appData.servicePercentPrices);
 //console.log("Стоимость за вычетом отката: " + " " + servicePercentPrices);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
