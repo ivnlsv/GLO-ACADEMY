@@ -25,7 +25,6 @@ const appData = {
 const isNumber = function (num) {
   return !isNaN(parseFloat(num)) && isFinite(num);
 };
-
 const getAllServicePrices = function () {
   let sum = 0;
   for (let i = 0; i < 2; i++) {
@@ -35,12 +34,8 @@ const getAllServicePrices = function () {
     } else if (i === 1) {
       appData.service2 = prompt("Какой еще дополнительный тип услуги нужен?");
     }
-
     do {
       price = prompt("Сколько это будет стоить?");
-      /* if (isNaN(price) || price === "" || price === null) { */
-      /*   alert("Введите число!"); */
-      /* } */
     } while (!isNumber(price));
     sum += +price;
   }
