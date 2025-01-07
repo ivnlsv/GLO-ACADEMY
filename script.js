@@ -18,7 +18,7 @@ const appData = {
     appData.screens = prompt("Какие типы экранов нужно разработать?");
     do {
       appData.screenPrice = prompt("Сколько будет стоить данная работа?");
-    } while (isNumber(appData.screenPrice));
+    } while (!isNumber(appData.screenPrice));
     appData.adaptive = confirm("Нужен ли адаптив на сайте?");
   },
 };
@@ -48,7 +48,7 @@ const getAllServicePrices = function () {
 };
 
 function getFullPrice() {
-  return appData.screenPrice + appData.allServicePrices;
+  return +appData.screenPrice + appData.allServicePrices;
 }
 
 const getRollbackMessage = function (price) {
