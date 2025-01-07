@@ -40,7 +40,7 @@ const getAllServicePrices = function () {
       if (isNaN(price) || price === "" || price === null) {
         alert("Введите число!");
       }
-    } while (isNaN(price) || price === "" || price === null);
+    } while (!isNumber(price));
     sum += +price;
   }
   return sum;
@@ -63,7 +63,7 @@ const getRollbackMessage = function (price) {
 };
 
 function getTitle() {
-  return title.trim()[0].toUpperCase() + title.trim().slice(1).toLowerCase();
+  return appData.title.trim()[0].toUpperCase() + appData.title.trim().slice(1).toLowerCase();
 }
 
 function getServicePercentPrices() {
