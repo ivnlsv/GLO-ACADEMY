@@ -18,6 +18,7 @@ const appData = {
     appData.title = appData.getTitle();
     appData.logger();
   },
+  isString: function (str) { },
   isNumber: function (num) {
     return !isNaN(parseFloat(num)) && isFinite(num);
   },
