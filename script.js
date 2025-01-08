@@ -82,4 +82,4 @@ const appData = {
   },
 };
 appData.start();
-//console.log("Стоимость за вычетом отката: " + " " + servicePercentPrices);
+
