@@ -47,7 +47,7 @@ const appData = {
       do { 
         name = prompt("Какой дополнительный тип услуги нужен?");
       } while (!appData.isString(name));
-       
+                     
       let price = 0;
       do {
         price = prompt("Сколько это будет стоить?");
@@ -93,8 +93,7 @@ const appData = {
   logger: function () {
     console.log(appData.fullPrice);
     console.log(appData.servicePercentPrices);
-
-    
+     
   },
 };
 appData.start();
