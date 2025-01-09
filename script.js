@@ -58,9 +58,9 @@ const appData = {
     appData.adaptive = confirm("Нужен ли адаптив на сайте?");
   },
   addPrices: function () {
-    for (let screen of appData.screens) {
-      appData.screenPrice += +screen.price;
-    }
+    appData.screenPrice = appData.screens.reduce((sum, screen) => {
+         return sum + +screen.price
+      });
     for (let key in appData.services) {
       appData.allServicePrices += appData.services[key];
     }
