@@ -1,4 +1,13 @@
 "use strict";
+const title = document.getElementsByTagName('h1');
+const buttons = document.getElementsByClassName('.handler_btn');
+const plusBtn = document.querySelector('.screen-btn');
+const otherItems = document.querySelectorAll('.other-items');
+const percentItems = Array.from(otherItems).filter(item => item.classList.contains('percent'));
+const numberItems = Array.from(otherItems).filter(item => item.classList.contains('number'));
+const rangeInput = document.querySelector('.rollback input[type="range"]');
+const spanItem = document.querySelector('.rollback span.range-value');
+let screens = Array.from(document.querySelectorAll('.screen'));
 
 const appData = {
   title: "",
