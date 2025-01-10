@@ -52,7 +52,12 @@ const appData = {
       do {
         price = prompt("Сколько это будет стоить?");
       } while (!appData.isNumber(price));
-      appData.services[name] = +price;
+      let uniqKey = name;
+      let count = 1;
+      while (appData.services.hasOwnProperty(uniqKey)) { 
+        uniqKey = `${name}_${count}`
+      }
+      appData.services[uniqKey] = +price;
     }
 
     appData.adaptive = confirm("Нужен ли адаптив на сайте?");
@@ -93,7 +98,7 @@ const appData = {
   logger: function () {
     console.log(appData.fullPrice);
     console.log(appData.servicePercentPrices);
-     
+    console.log(appData.services) 
   },
 };
 appData.start();
