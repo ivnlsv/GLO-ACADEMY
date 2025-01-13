@@ -1,6 +1,7 @@
 "use strict";
 const titleH = document.getElementsByTagName('h1');
-const buttons = document.getElementsByClassName('.handler_btn');
+const buttons = document.getElementsByClassName('handler_btn');
+const arrButtons = Array.from(buttons);
 const plusBtn = document.querySelector('.screen-btn');
 const otherItems = document.querySelectorAll('.other-items');
 const percentItems = Array.from(otherItems).filter(item => item.classList.contains('percent'));
@@ -8,6 +9,13 @@ const numberItems = Array.from(otherItems).filter(item => item.classList.contain
 const rangeInput = document.querySelector('.rollback input[type="range"]');
 const spanItem = document.querySelector('.rollback span.range-value');
 let screensA = Array.from(document.querySelectorAll('.screen'));
+const inputs = document.getElementsByClassName('total-input');
+const inputElements = Array.from(inputs);
+
+function getTitleH() { 
+  return titleH[0]
+
+}
 
 const appData = {
   title: "",
@@ -107,8 +115,8 @@ const appData = {
   },
 };
 appData.start();
-console.log(titleH);
-console.log(buttons);
+console.log(getTitleH().textContent);
+console.log(arrButtons);
 console.log(plusBtn);
 console.log(otherItems);
 console.log(percentItems);
@@ -116,3 +124,4 @@ console.log(numberItems);
 console.log(rangeInput);
 console.log(spanItem);
 console.log(screensA);
+console.log(inputElements);
