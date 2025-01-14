@@ -1,8 +1,7 @@
 "use strict";
 const titleH = document.getElementsByTagName('h1');
-const buttons = document.getElementsByClassName('handler_btn');
-const calcButton = buttons[0];
-const resetButton = buttons[1];
+const calcButton = document.getElementsByClassName('handler_btn')[0];
+const resetButton = document.getElementsByClassName('handler_btn')[1];
 const plusBtn = document.querySelector('.screen-btn');
 const percentItems = document.querySelectorAll('.other-items.percent');
 const numberItems = document.querySelectorAll('.other-items.number');
