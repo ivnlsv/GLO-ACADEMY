@@ -1,21 +1,15 @@
 "use strict";
 const titleH = document.getElementsByTagName('h1');
 const buttons = document.getElementsByClassName('handler_btn');
-const arrButtons = Array.from(buttons);
+const calcButton = buttons[0];
+const resetButton = buttons[1];
 const plusBtn = document.querySelector('.screen-btn');
-const otherItems = document.querySelectorAll('.other-items');
-const percentItems = Array.from(otherItems).filter(item => item.classList.contains('percent'));
-const numberItems = Array.from(otherItems).filter(item => item.classList.contains('number'));
+const percentItems = document.querySelectorAll('.other-items.percent');
+const numberItems = document.querySelectorAll('.other-items.number');
 const rangeInput = document.querySelector('.rollback input[type="range"]');
 const spanItem = document.querySelector('.rollback span.range-value');
 let screensA = Array.from(document.querySelectorAll('.screen'));
 const inputs = document.getElementsByClassName('total-input');
-const inputElements = Array.from(inputs);
-
-function getTitleH() { 
-  return titleH[0]
-
-}
 
 const appData = {
   title: "",
@@ -114,14 +108,25 @@ const appData = {
     
   },
 };
+
+function getTitleH() { 
+  return titleH[0]
+
+}
+function getInputs() { 
+  for (let i = 0; i < inputs.length; i++) { 
+    const inputElem = inputs[i];
+    console.log(inputElem)
+  }
+}
 appData.start();
 console.log(getTitleH().textContent);
-console.log(arrButtons);
+console.log(calcButton);
+console.log(resetButton);
 console.log(plusBtn);
-console.log(otherItems);
 console.log(percentItems);
 console.log(numberItems);
 console.log(rangeInput);
 console.log(spanItem);
 console.log(screensA);
-console.log(inputElements);
+getInputs();
