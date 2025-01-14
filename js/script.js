@@ -24,7 +24,7 @@ const appData = {
   init: function () { 
     appData.addTitle();
     calcButton.addEventListener('click', appData.start);
-    plusBtn.addEventListener('clock', appData.addScreenBlock);
+    plusBtn.addEventListener('click', appData.addScreenBlock);
   },
   addTitle: function () { 
     document.title = title.textContent;
