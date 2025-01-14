@@ -8,7 +8,11 @@ const numberItems = document.querySelectorAll('.other-items.number');
 const rangeInput = document.querySelector('.rollback input[type="range"]');
 const spanItem = document.querySelector('.rollback span.range-value');
 let screensA = Array.from(document.querySelectorAll('.screen'));
-const inputs = document.getElementsByClassName('total-input');
+const total = document.getElementsByClassName('total-input')[0];
+const totalCount = document.getElementsByClassName('total-input')[1];
+const totalOther = document.getElementsByClassName('total-input')[2];
+const totalFull = document.getElementsByClassName('total-input')[3];
+const totalRollback = document.getElementsByClassName('total-input')[4];
 
 const appData = {
   title: "",
@@ -112,12 +116,6 @@ function getTitleH() {
   return titleH[0]
 
 }
-function getInputs() { 
-  for (let i = 0; i < inputs.length; i++) { 
-    const inputElem = inputs[i];
-    console.log(inputElem)
-  }
-}
 appData.start();
 console.log(getTitleH().textContent);
 console.log(calcButton);
@@ -128,4 +126,9 @@ console.log(numberItems);
 console.log(rangeInput);
 console.log(spanItem);
 console.log(screensA);
-getInputs();
+console.log(total);
+console.log(totalCount);
+console.log(totalOther);
+console.log(totalFull);
+console.log(totalRollback);
+
