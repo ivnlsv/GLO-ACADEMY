@@ -125,7 +125,7 @@ input {
   }
 }
 
-button {
+.button {
   background-color: #a52a2a;
   border: none;
   padding: 10px;
@@ -140,17 +140,9 @@ button {
     background-color: lighten($color: #a52a2a, $amount: 5%);
   }
 }
-.disabled:disabled {
-    cursor: not-allowed;
-    pointer-events: none;
-    background-color: #cccccc;
-    color: #666666;
+.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: #cccccc;
+  color: #666666;
 }
-
-
-
-
-
-
-
-

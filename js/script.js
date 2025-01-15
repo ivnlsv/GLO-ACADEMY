@@ -3,6 +3,7 @@ const title = document.getElementsByTagName("h1")[0];
 const buttons = document.getElementsByClassName("handler_btn");
 const calcButton = buttons[0];
 const resetButton = buttons[1];
+//const disableBtn = document.querySelector('#start').disabled = true;
 const plusBtn = document.querySelector(".screen-btn");
 const percentItems = document.querySelectorAll(".other-items.percent");
 const numberItems = document.querySelectorAll(".other-items.number");
@@ -10,11 +11,12 @@ const rangeInput = document.querySelector('.rollback input[type="range"]');
 const spanItem = document.querySelector(".rollback span.range-value");
 let screens = document.querySelectorAll(".screen");
 const total = document.getElementsByClassName("total-input")[0];
-const totalCount = document.getElementsByClassName('total-input')[1];
-const totalOther = document.getElementsByClassName('total-input')[2];
-const totalFull = document.getElementsByClassName('total-input')[3];
-const totalRollback = document.getElementsByClassName('total-input')[4];
-
+const totalCount = document.getElementsByClassName("total-input")[1];
+const totalOther = document.getElementsByClassName("total-input")[2];
+const totalFull = document.getElementsByClassName("total-input")[3];
+const totalRollback = document.getElementsByClassName("total-input")[4];
+//const select = document.querySelectorAll("select");
+//const input = document.querySelectorAll("input");
 
 const appData = {
   title: "",
@@ -30,8 +32,15 @@ const appData = {
   servicesNumber: {},
   init: function () {
     appData.addTitle();
-    calcButton.addEventListener('click', appData.start);
-    plusBtn.addEventListener('click', appData.addScreenBlock);
+    appData.checkFields();
+    document.querySelectorAll("select").forEach(select => {
+      select.addEventListener("change", appData.checkFields);
+    });
+    document.querySelectorAll("input").forEach(input => {
+      input.addEventListener("input", appData.checkFields);
+    });
+    calcButton.addEventListener("click", appData.start);
+    plusBtn.addEventListener("click", appData.addScreenBlock);
   },
   addTitle: function () {
     document.title = title.textContent;
@@ -45,11 +54,11 @@ const appData = {
     //appData.title = appData.getTitle();
     //appData.logger();
     appData.showResult();
-    
   },
   showResult: function () {
     total.value = appData.screenPrice;
-    totalOther.value = appData.servicePricesPercent + appData.servicePricesNumber;
+    totalOther.value =
+      appData.servicePricesPercent + appData.servicePricesNumber;
     totalFull.value = appData.fullPrice;
   },
   addScreens: function () {
@@ -65,6 +74,34 @@ const appData = {
       });
     });
   },
+  checkFields: function () {
+    const allSelect = document.querySelectorAll("select");
+    const allInput = document.querySelectorAll("input");
+    let allFilled = true;
+
+    allSelect.forEach((select) => {
+      if (select.value === "") allFilled = false;
+    });
+    allInput.forEach((input) => {
+      if (input.value.trim() === "") allFilled = false;
+    });
+    if (allFilled) {
+      calcButton.disabled = false;
+      calcButton.classList.remove("disabled");
+    } else {
+      calcButton.disabled = true;
+      calcButton.classList.add("disabled");
+    }
+  },
+/*   toggleButton: function () { */
+/*     if (select.value && input.value.trim()) { */
+/*       calcButton.disabled = false; */
+/*       calcButton.classList.remove("disabled"); */
+/*     } else { */
+/*       calcButton.disabled = true; */
+/*       calcButton.classList.add("disabled"); */
+/*     } */
+/*   }, */
   addServices: function () {
     percentItems.forEach(function (item) {
       const check = item.querySelector("input[type=checkbox]");
@@ -119,9 +156,7 @@ const appData = {
     } else {
       return "Что то пошло не так";
     }
-  }
-    
-  
+  },
 };
 
 appData.init();
