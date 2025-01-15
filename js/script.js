@@ -33,14 +33,14 @@ const appData = {
   init: function () {
     appData.addTitle();
     appData.checkFields();
-    document.querySelectorAll("select").forEach(select => {
-      select.addEventListener("change", appData.checkFields);
-    });
-    document.querySelectorAll("input").forEach(input => {
-      input.addEventListener("input", appData.checkFields);
-    });
     calcButton.addEventListener("click", appData.start);
     plusBtn.addEventListener("click", appData.addScreenBlock);
+    document.querySelectorAll("#select").forEach((select) => {
+      select.addEventListener("change", appData.checkFields);
+    });
+    document.querySelectorAll("#input").forEach((input) => {
+      input.addEventListener("input", appData.checkFields);
+    });
   },
   addTitle: function () {
     document.title = title.textContent;
@@ -73,10 +73,17 @@ const appData = {
         price: +select.value * +input.value,
       });
     });
+    document.querySelectorAll("#select").forEach((select) => {
+      select.addEventListener("change", appData.checkFields);
+    });
+    document.querySelectorAll("#input").forEach((input) => {
+      input.addEventListener("input", appData.checkFields);
+    });
+    appData.checkFields();
   },
   checkFields: function () {
-    const allSelect = document.querySelectorAll("select");
-    const allInput = document.querySelectorAll("input");
+    const allSelect = document.querySelectorAll("#select");
+    const allInput = document.querySelectorAll("#input");
     let allFilled = true;
 
     allSelect.forEach((select) => {
@@ -93,15 +100,15 @@ const appData = {
       calcButton.classList.add("disabled");
     }
   },
-/*   toggleButton: function () { */
-/*     if (select.value && input.value.trim()) { */
-/*       calcButton.disabled = false; */
-/*       calcButton.classList.remove("disabled"); */
-/*     } else { */
-/*       calcButton.disabled = true; */
-/*       calcButton.classList.add("disabled"); */
-/*     } */
-/*   }, */
+  /*   toggleButton: function () { */
+  /*     if (select.value && input.value.trim()) { */
+  /*       calcButton.disabled = false; */
+  /*       calcButton.classList.remove("disabled"); */
+  /*     } else { */
+  /*       calcButton.disabled = true; */
+  /*       calcButton.classList.add("disabled"); */
+  /*     } */
+  /*   }, */
   addServices: function () {
     percentItems.forEach(function (item) {
       const check = item.querySelector("input[type=checkbox]");
@@ -123,6 +130,7 @@ const appData = {
   addScreenBlock: function () {
     const cloneScreen = screens[0].cloneNode(true);
     screens[screens.length - 1].after(cloneScreen);
+    appData.checkFields();
   },
 
   addPrices: function () {
