@@ -72,14 +72,15 @@ const appData = {
         name: selectName,
         price: +select.value * +input.value,
       });
+      document.querySelectorAll("#select").forEach((select) => {
+        select.addEventListener("change", appData.checkFields);
+      });
+      document.querySelectorAll("#input").forEach((input) => {
+        input.addEventListener("input", appData.checkFields);
+      });
     });
-    document.querySelectorAll("#select").forEach((select) => {
-      select.addEventListener("change", appData.checkFields);
-    });
-    document.querySelectorAll("#input").forEach((input) => {
-      input.addEventListener("input", appData.checkFields);
-    });
-    appData.checkFields();
+    appData.checkFields(); 
+    
   },
   checkFields: function () {
     const allSelect = document.querySelectorAll("#select");
