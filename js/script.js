@@ -20,7 +20,7 @@ const appData = {
   screens: [],
   adaptive: true,
   screenPrice: 0,
-  rollback: 10,
+  rollback: 0,
   servicePricesPercent: 0,
   servicePricesNumber: 0,
   fullPrice: 0,
@@ -138,6 +138,14 @@ const appData = {
   },
 
   getServicePercentPrices: function () {
+    rangeInput.addEventListener('input', (event) => {
+      // Обновляем значение в span
+      const value = event.target.value;
+      spanItem.textContent = value;
+      
+      // Обновляем значение в объекте
+      appData.rollback = value;
+  });
     return appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
   },
 
