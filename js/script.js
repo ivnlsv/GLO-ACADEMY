@@ -18,6 +18,7 @@ const totalRollback = document.getElementsByClassName("total-input")[4];
 const appData = {
   title: "",
   screens: [],
+  count: 0,
   adaptive: true,
   screenPrice: 0,
   rollback: 0,
@@ -44,16 +45,15 @@ const appData = {
   addTitle: function () {
     document.title = title.textContent;
   },
-  getRollback: function () { 
-    rangeInput.addEventListener('input', (event) => {
+  getRollback: function () {
+    rangeInput.addEventListener("input", (event) => {
       // Обновляем значение в span
       const value = event.target.value;
       spanItem.textContent = value + "%";
-      
+
       // Обновляем значение в объекте
       appData.rollback = +value;
-      
-  });
+    });
   },
   start: function () {
     appData.addScreens();
@@ -71,6 +71,7 @@ const appData = {
       appData.servicePricesPercent + appData.servicePricesNumber;
     totalFull.value = appData.fullPrice;
     totalRollback.value = appData.rollBackTotal;
+    totalCount.value = appData.count;
   },
   addScreens: function () {
     let screens = document.querySelectorAll(".screen");
@@ -84,6 +85,7 @@ const appData = {
         price: +select.value * +input.value,
       });
     });
+    appData.count = appData.screens.length;
   },
   checkFields: function () {
     const allSelect = document.querySelectorAll("#select");
@@ -149,8 +151,8 @@ const appData = {
       +appData.screenPrice +
       appData.servicePricesNumber +
       appData.servicePricesPercent;
-      appData.rollBackTotal = appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
-  
+    appData.rollBackTotal =
+      appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
   },
 
   //getServicePercentPrices: function () {
