@@ -3,7 +3,6 @@ const title = document.getElementsByTagName("h1")[0];
 const buttons = document.getElementsByClassName("handler_btn");
 const calcButton = buttons[0];
 const resetButton = buttons[1];
-//const disableBtn = document.querySelector('#start').disabled = true;
 const plusBtn = document.querySelector(".screen-btn");
 const percentItems = document.querySelectorAll(".other-items.percent");
 const numberItems = document.querySelectorAll(".other-items.number");
@@ -15,8 +14,6 @@ const totalCount = document.getElementsByClassName("total-input")[1];
 const totalOther = document.getElementsByClassName("total-input")[2];
 const totalFull = document.getElementsByClassName("total-input")[3];
 const totalRollback = document.getElementsByClassName("total-input")[4];
-//const select = document.querySelectorAll("select");
-//const input = document.querySelectorAll("input");
 
 const appData = {
   title: "",
@@ -72,15 +69,7 @@ const appData = {
         name: selectName,
         price: +select.value * +input.value,
       });
-      document.querySelectorAll("#select").forEach((select) => {
-        select.addEventListener("change", appData.checkFields);
-      });
-      document.querySelectorAll("#input").forEach((input) => {
-        input.addEventListener("input", appData.checkFields);
-      });
     });
-    appData.checkFields(); 
-    
   },
   checkFields: function () {
     const allSelect = document.querySelectorAll("#select");
@@ -101,15 +90,6 @@ const appData = {
       calcButton.classList.add("disabled");
     }
   },
-  /*   toggleButton: function () { */
-  /*     if (select.value && input.value.trim()) { */
-  /*       calcButton.disabled = false; */
-  /*       calcButton.classList.remove("disabled"); */
-  /*     } else { */
-  /*       calcButton.disabled = true; */
-  /*       calcButton.classList.add("disabled"); */
-  /*     } */
-  /*   }, */
   addServices: function () {
     percentItems.forEach(function (item) {
       const check = item.querySelector("input[type=checkbox]");
@@ -131,6 +111,12 @@ const appData = {
   addScreenBlock: function () {
     const cloneScreen = screens[0].cloneNode(true);
     screens[screens.length - 1].after(cloneScreen);
+    document.querySelectorAll("#select").forEach((select) => {
+      select.addEventListener("change", appData.checkFields);
+    });
+    document.querySelectorAll("#input").forEach((input) => {
+      input.addEventListener("input", appData.checkFields);
+    });
     appData.checkFields();
   },
 
