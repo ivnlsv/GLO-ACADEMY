@@ -160,17 +160,17 @@ const appData = {
   //   appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
   //},
 
-  getRollbackMessage: function (price) {
-    if (price >= 30000) {
-      return "Даем скидку в 10%";
-    } else if (price >= 15000 && price < 30000) {
-      return "Даем скидку в 5%";
-    } else if (price > 0 && price < 15000) {
-      return "Скидка не предусмотрена";
-    } else {
-      return "Что то пошло не так";
-    }
-  },
+ // getRollbackMessage: function (price) {
+ //   if (price >= 30000) {
+ //     return "Даем скидку в 10%";
+ //   } else if (price >= 15000 && price < 30000) {
+ //     return "Даем скидку в 5%";
+ //   } else if (price > 0 && price < 15000) {
+ //     return "Скидка не предусмотрена";
+ //   } else {
+ //     return "Что то пошло не так";
+ //   }
+ // },
 };
 
 appData.init();
