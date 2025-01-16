@@ -21,6 +21,7 @@ const appData = {
   adaptive: true,
   screenPrice: 0,
   rollback: 0,
+  rollBackTotal: 0,
   servicePricesPercent: 0,
   servicePricesNumber: 0,
   fullPrice: 0,
@@ -30,6 +31,7 @@ const appData = {
   init: function () {
     appData.addTitle();
     appData.checkFields();
+    appData.getRollback();
     calcButton.addEventListener("click", appData.start);
     plusBtn.addEventListener("click", appData.addScreenBlock);
     document.querySelectorAll("#select").forEach((select) => {
@@ -41,6 +43,17 @@ const appData = {
   },
   addTitle: function () {
     document.title = title.textContent;
+  },
+  getRollback: function () { 
+    rangeInput.addEventListener('input', (event) => {
+      // Обновляем значение в span
+      const value = event.target.value;
+      spanItem.textContent = value + "%";
+      
+      // Обновляем значение в объекте
+      appData.rollback = +value;
+      
+  });
   },
   start: function () {
     appData.addScreens();
@@ -57,6 +70,7 @@ const appData = {
     totalOther.value =
       appData.servicePricesPercent + appData.servicePricesNumber;
     totalFull.value = appData.fullPrice;
+    totalRollback.value = appData.rollBackTotal;
   },
   addScreens: function () {
     let screens = document.querySelectorAll(".screen");
@@ -135,19 +149,14 @@ const appData = {
       +appData.screenPrice +
       appData.servicePricesNumber +
       appData.servicePricesPercent;
+      appData.rollBackTotal = appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
+  
   },
 
-  getServicePercentPrices: function () {
-    rangeInput.addEventListener('input', (event) => {
-      // Обновляем значение в span
-      const value = event.target.value;
-      spanItem.textContent = value;
-      
-      // Обновляем значение в объекте
-      appData.rollback = value;
-  });
-    return appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
-  },
+  //getServicePercentPrices: function () {
+  //  appData.getRollback();
+  //   appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
+  //},
 
   getRollbackMessage: function (price) {
     if (price >= 30000) {
