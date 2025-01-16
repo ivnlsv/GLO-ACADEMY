@@ -47,11 +47,8 @@ const appData = {
   },
   getRollback: function () {
     rangeInput.addEventListener("input", (event) => {
-      // Обновляем значение в span
-      const value = event.target.value;
+       const value = event.target.value;
       spanItem.textContent = value + "%";
-
-      // Обновляем значение в объекте
       appData.rollback = +value;
     });
   },
@@ -59,9 +56,6 @@ const appData = {
     appData.addScreens();
     appData.addServices();
     appData.addPrices();
-    //appData.fullPrice = appData.getFullPrice();
-    //appData.servicePercentPrices = appData.getServicePercentPrices();
-    //appData.title = appData.getTitle();
     //appData.logger();
     appData.showResult();
   },
@@ -154,23 +148,6 @@ const appData = {
     appData.rollBackTotal =
       appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
   },
-
-  //getServicePercentPrices: function () {
-  //  appData.getRollback();
-  //   appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
-  //},
-
- // getRollbackMessage: function (price) {
- //   if (price >= 30000) {
- //     return "Даем скидку в 10%";
- //   } else if (price >= 15000 && price < 30000) {
- //     return "Даем скидку в 5%";
- //   } else if (price > 0 && price < 15000) {
- //     return "Скидка не предусмотрена";
- //   } else {
- //     return "Что то пошло не так";
- //   }
- // },
 };
 
 appData.init();
