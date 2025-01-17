@@ -30,16 +30,16 @@ const appData = {
   servicesPercent: {},
   servicesNumber: {},
   init: function () {
-    appData.addTitle();
-    appData.checkFields();
-    appData.getRollback();
-    calcButton.addEventListener("click", appData.start);
-    plusBtn.addEventListener("click", appData.addScreenBlock);
+    this.addTitle();
+    this.checkFields();
+    this.getRollback();
+    calcButton.addEventListener("click", this.start);
+    plusBtn.addEventListener("click", this.addScreenBlock);
     document.querySelectorAll("#select").forEach((select) => {
-      select.addEventListener("change", appData.checkFields);
+      select.addEventListener("change", this.checkFields);
     });
     document.querySelectorAll("#input").forEach((input) => {
-      input.addEventListener("input", appData.checkFields);
+      input.addEventListener("input", this.checkFields);
     });
   },
   addTitle: function () {
@@ -49,7 +49,7 @@ const appData = {
     rangeInput.addEventListener("input", (event) => {
        const value = event.target.value;
       spanItem.textContent = value + "%";
-      appData.rollback = +value;
+      this.rollback = +value;
     });
   },
   start: function () {
@@ -57,15 +57,15 @@ const appData = {
     appData.addServices();
     appData.addPrices();
     //appData.logger();
-    appData.showResult();
+    this.showResult();
   },
   showResult: function () {
-    total.value = appData.screenPrice;
+    total.value = this.screenPrice;
     totalOther.value =
-      appData.servicePricesPercent + appData.servicePricesNumber;
-    totalFull.value = appData.fullPrice;
-    totalRollback.value = appData.rollBackTotal;
-    totalCount.value = appData.count;
+      this.servicePricesPercent + this.servicePricesNumber;
+    totalFull.value = this.fullPrice;
+    totalRollback.value = this.rollBackTotal;
+    totalCount.value = this.count;
   },
   addScreens: function () {
     let screens = document.querySelectorAll(".screen");
