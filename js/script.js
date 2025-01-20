@@ -14,6 +14,10 @@ const totalCount = document.getElementsByClassName("total-input")[1];
 const totalOther = document.getElementsByClassName("total-input")[2];
 const totalFull = document.getElementsByClassName("total-input")[3];
 const totalRollback = document.getElementsByClassName("total-input")[4];
+const cmsCheckbox = document.getElementById("cms-open");
+const hiddenCmsVariants = document.querySelector(".hidden-cms-variants"); 
+const otherOption = document.querySelector('option[value="other"]');
+const mainControlsInput = document.querySelector('.hidden-cms-variants .main-controls__input');
 
 const appData = {
   title: "",
@@ -36,8 +40,10 @@ const appData = {
     calcButton.addEventListener("click", this.start.bind(this));
     resetButton.addEventListener("click", this.reset.bind(this));
     plusBtn.addEventListener("click", this.addScreenBlock.bind(this));
+    cmsCheckbox.addEventListener('change', this.toggleHiddenCmsVariants.bind(this));
     document.querySelectorAll("#select").forEach((select) => {
       select.addEventListener("change", this.checkFields.bind(this));
+      select.addEventListener("change", this.checkOtherOption.bind(this));
     });
     document.querySelectorAll("#input").forEach((input) => {
       input.addEventListener("input", this.checkFields.bind(this));
@@ -94,11 +100,14 @@ const appData = {
     totalFull.value = "";
     totalRollback.value = "";
     totalCount.value = "";
-
+    rangeInput.value = 0; 
+    spanItem.textContent = '0%';
     const checkboxes = document.querySelectorAll("input[type=checkbox]");
     checkboxes.forEach((checkbox) => {
       if (checkbox.checked) {
         checkbox.checked = false;
+        this.toggleHiddenCmsVariants();
+        mainControlsInput.style.display = 'none';
       }
     });
 
@@ -149,6 +158,24 @@ const appData = {
       calcButton.classList.add("disabled");
     }
   },
+  toggleHiddenCmsVariants: function () {
+    if(cmsCheckbox.checked) {
+        hiddenCmsVariants.style.display = 'flex';
+    } else {
+        hiddenCmsVariants.style.display = 'none';
+    }
+},
+
+checkOtherOption: function () {
+    let allSelects = document.querySelectorAll("#select");
+    allSelects.forEach((select) => {
+        if (select.value === "other") {
+            mainControlsInput.style.display = 'block'; // Показываю блок с классом main-controls__input
+        } else {
+            mainControlsInput.style.display = 'none'; // Скрываю блок при выборе других значений
+        }
+    });
+},
   addServices: function () {
     percentItems.forEach((item) => {
       const check = item.querySelector("input[type=checkbox]");
@@ -172,6 +199,7 @@ const appData = {
     screens[screens.length - 1].after(cloneScreen);
     document.querySelectorAll("#select").forEach((select) => {
       select.addEventListener("change", this.checkFields.bind(this));
+      select.addEventListener("change", this.checkOtherOption.bind(this));
     });
     document.querySelectorAll("#input").forEach((input) => {
       input.addEventListener("input", this.checkFields.bind(this));
