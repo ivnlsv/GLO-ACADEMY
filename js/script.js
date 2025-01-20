@@ -37,14 +37,16 @@ const appData = {
     this.addTitle();
     this.checkFields();
     this.getRollback();
+    this.checkOtherOption();
     calcButton.addEventListener("click", this.start.bind(this));
     resetButton.addEventListener("click", this.reset.bind(this));
     plusBtn.addEventListener("click", this.addScreenBlock.bind(this));
     cmsCheckbox.addEventListener('change', this.toggleHiddenCmsVariants.bind(this));
     document.querySelectorAll("#select").forEach((select) => {
-      select.addEventListener("change", this.checkFields.bind(this));
-      select.addEventListener("change", this.checkOtherOption.bind(this));
+      select.addEventListener("change", this.checkFields.bind(this))
+    // select.addEventListener("change", this.checkOtherOption.bind(this));
     });
+    
     document.querySelectorAll("#input").forEach((input) => {
       input.addEventListener("input", this.checkFields.bind(this));
     });
@@ -64,10 +66,11 @@ const appData = {
   start: function () {
     this.addScreens();
     this.addServices();
+    
     this.addPrices();
     //appData.logger();
     this.showResult();
-    this.disableInputs(); // Блокируем все поля
+    this.disableInputs(); 
     calcButton.style.display = "none"; // Скрываем кнопку "Рассчитать"
     resetButton.style.display = "block"; // Показываем кнопку "Сброс"
   },
@@ -160,22 +163,47 @@ const appData = {
   },
   toggleHiddenCmsVariants: function () {
     if(cmsCheckbox.checked) {
-        hiddenCmsVariants.style.display = 'flex';
+      hiddenCmsVariants.style.display = 'flex';
+        
+    
     } else {
-        hiddenCmsVariants.style.display = 'none';
+      hiddenCmsVariants.style.display = 'none';
+      
     }
-},
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  },
+  checkOtherOption: function () { 
+    let selectOther = document.getElementById("cms-select");
+    selectOther.addEventListener('change', (event) => { 
+      const select = event.target.value;
+      console.log(select)
+      if (select === 'other') {
+        mainControlsInput.style.display = 'block';
+      } else { 
+        mainControlsInput.style.display = 'none';
+      }
+    })
+  },
 
-checkOtherOption: function () {
-    let allSelects = document.querySelectorAll("#select");
-    allSelects.forEach((select) => {
-        if (select.value === "other") {
-            mainControlsInput.style.display = 'block'; // Показываю блок с классом main-controls__input
-        } else {
-            mainControlsInput.style.display = 'none'; // Скрываю блок при выборе других значений
-        }
-    });
-},
+//  checkOtherOption: function () {
+//    let selectOther = document.getElementById("#cms-select");
+  //  selectOther.forEach((select) => {
+  //       console.log(select.value)
+//        if (selectOther.value === "other") {
+//            mainControlsInput.style.display = 'block'; 
+//        } else {
+//            mainControlsInput.style.display = 'none'; 
+       // }
+  //  });
+//},
   addServices: function () {
     percentItems.forEach((item) => {
       const check = item.querySelector("input[type=checkbox]");
