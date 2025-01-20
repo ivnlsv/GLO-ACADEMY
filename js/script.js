@@ -47,15 +47,18 @@ const appData = {
   },
   getRollback: function () {
     rangeInput.addEventListener("input", (event) => {
-       const value = event.target.value;
+      const value = event.target.value;
       spanItem.textContent = value + "%";
       appData.rollback = +value;
+      appData.addPrices();
+      appData.showResult();
     });
   },
   start: function () {
     appData.addScreens();
     appData.addServices();
     appData.addPrices();
+
     //appData.logger();
     appData.showResult();
   },
@@ -63,9 +66,15 @@ const appData = {
     total.value = appData.screenPrice;
     totalOther.value =
       appData.servicePricesPercent + appData.servicePricesNumber;
+    appData.fullPrice =
+      +appData.screenPrice +
+      appData.servicePricesNumber +
+      appData.servicePricesPercent;
     totalFull.value = appData.fullPrice;
-    totalRollback.value = appData.rollBackTotal;
+    appData.rollBackTotal =
+      appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
     totalCount.value = appData.count;
+    totalRollback.value = appData.rollBackTotal;
   },
   addScreens: function () {
     let screens = document.querySelectorAll(".screen");
@@ -78,8 +87,8 @@ const appData = {
         name: selectName,
         price: +select.value * +input.value,
       });
+      appData.count += +input.value;
     });
-    appData.count = appData.screens.length;
   },
   checkFields: function () {
     const allSelect = document.querySelectorAll("#select");
@@ -131,6 +140,10 @@ const appData = {
   },
 
   addPrices: function () {
+    appData.screenPrice = 0;
+    appData.servicePricesPercent = 0;
+    appData.servicePricesNumber = 0;
+
     for (let screen of appData.screens) {
       appData.screenPrice += +screen.price;
     }
@@ -141,12 +154,7 @@ const appData = {
       appData.servicePricesPercent +=
         appData.screenPrice * (appData.servicesPercent[key] / 100);
     }
-    appData.fullPrice =
-      +appData.screenPrice +
-      appData.servicePricesNumber +
-      appData.servicePricesPercent;
-    appData.rollBackTotal =
-      appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
+    
   },
 };
 
