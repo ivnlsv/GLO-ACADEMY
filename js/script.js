@@ -34,6 +34,7 @@ const appData = {
     this.checkFields();
     this.getRollback();
     calcButton.addEventListener("click", this.start.bind(this));
+    resetButton.addEventListener("click", this.reset.bind(this));
     plusBtn.addEventListener("click", this.addScreenBlock.bind(this));
     document.querySelectorAll("#select").forEach((select) => {
       select.addEventListener("change", this.checkFields.bind(this));
@@ -60,6 +61,49 @@ const appData = {
     this.addPrices();
     //appData.logger();
     this.showResult();
+    this.disableInputs(); // Блокируем все поля
+    calcButton.style.display = "none"; // Скрываем кнопку "Рассчитать"
+    resetButton.style.display = "block"; // Показываем кнопку "Сброс"
+  },
+  disableInputs: function () {
+    const allInputs = document.querySelectorAll('input[type="text"], select');
+    allInputs.forEach((input) => {
+      input.disabled = true;
+    });
+  },
+  reset: function () {
+    this.screens = [];
+    this.count = 0;
+    this.screenPrice = 0;
+    this.rollback = 0;
+    this.servicePricesPercent = 0;
+    this.servicePricesNumber = 0;
+
+    document.querySelectorAll("select").forEach((select) => {
+      select.disabled = false;
+      select.selectedIndex = 0;
+    });
+
+    document.querySelectorAll("input[type='text']").forEach((input) => {
+      input.disabled = false;
+      input.value = "";
+    });
+
+    total.value = "";
+    totalOther.value = "";
+    totalFull.value = "";
+    totalRollback.value = "";
+    totalCount.value = "";
+
+    const checkboxes = document.querySelectorAll("input[type=checkbox]");
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        checkbox.checked = false;
+      }
+    });
+
+    resetButton.style.display = "none";
+    calcButton.style.display = "block";
   },
   showResult: function () {
     total.value = this.screenPrice;
@@ -85,7 +129,6 @@ const appData = {
       });
       this.count += +input.value;
     });
-    
   },
   checkFields: function () {
     const allSelect = document.querySelectorAll("#select");
@@ -148,7 +191,7 @@ const appData = {
     }
     for (let key in this.servicesPercent) {
       this.servicePricesPercent +=
-        this.screenPrice * (athis.servicesPercent[key] / 100);
+        this.screenPrice * (this.servicesPercent[key] / 100);
     }
   },
 };
