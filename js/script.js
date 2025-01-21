@@ -74,7 +74,7 @@ const appData = {
     appData.rollBackTotal =
       appData.fullPrice - appData.fullPrice * (appData.rollback / 100);
     totalCount.value = appData.count;
-    totalRollback.value = appData.rollBackTotal;
+    totalRollback.value = Math.round(appData.rollBackTotal);
   },
   addScreens: function () {
     let screens = document.querySelectorAll(".screen");
