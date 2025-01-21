@@ -75,8 +75,8 @@ const appData = {
     //appData.logger();
     this.showResult();
     this.disableInputs();
-    calcButton.style.display = "none"; // Скрываем кнопку "Рассчитать"
-    resetButton.style.display = "block"; // Показываем кнопку "Сброс"
+    calcButton.style.display = "none";
+    resetButton.style.display = "block";
   },
   disableInputs: function () {
     const allInputs = document.querySelectorAll('input[type="text"], select');
@@ -121,32 +121,31 @@ const appData = {
     calcButton.style.display = "block";
   },
   showResult: function () {
+    this.addPrices();
+
+    total.value = this.screenPrice;
+    totalOther.value = this.servicePricesPercent + this.servicePricesNumber;
+    this.fullPrice =
+      +this.screenPrice + this.servicePricesNumber + this.servicePricesPercent;
+    totalFull.value = this.fullPrice;
+    this.rollBackTotal =
+      this.fullPrice - this.fullPrice * (this.rollback / 100);
+    totalRollback.value = this.rollBackTotal;
+
+    totalRollback.value = this.rollBackTotal;
+    totalCount.value = this.count;
+
     let selectWP = document.getElementById("cms-select");
     selectWP.addEventListener("change", (event) => {
       const select = event.target.value;
-      console.log(select);
+
       if (select === "50") {
-        let sum = +select * 2
-        console.log(sum)
-      } else {
-        let sum = +select;
-        console.log(sum)
-      }
-      
-    });
-    total.value = this.screenPrice;
-    totalOther.value = this.servicePricesPercent + this.servicePricesNumber;
-        this.fullPrice =
-          +this.screenPrice +
-            this.servicePricesNumber +
-            this.servicePricesPercent;
+        this.fullPrice *= 1.5;
         totalFull.value = this.fullPrice;
-        this.rollBackTotal =
-          this.fullPrice - this.fullPrice * (this.rollback / 100);
-        totalRollback.value = this.rollBackTotal;
-           
-   totalRollback.value = this.rollBackTotal;
-    totalCount.value = this.count;
+      } else {
+        totalFull.value = this.fullPrice;
+      }
+    });
   },
   addScreens: function () {
     screens = document.querySelectorAll(".screen");
