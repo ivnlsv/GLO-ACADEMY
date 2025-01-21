@@ -26,6 +26,7 @@ const appData = {
   screens: [],
   count: 0,
   adaptive: true,
+  multiplier: null,
   screenPrice: 0,
   rollback: 0,
   rollBackTotal: 0,
@@ -39,7 +40,7 @@ const appData = {
     this.addTitle();
     this.checkFields();
     this.getRollback();
-    this.checkOtherOption();
+    this.checkSelectOption();
     calcButton.addEventListener("click", this.start.bind(this));
     resetButton.addEventListener("click", this.reset.bind(this));
     plusBtn.addEventListener("click", this.addScreenBlock.bind(this));
@@ -49,8 +50,7 @@ const appData = {
     );
     document.querySelectorAll("#select").forEach((select) => {
       select.addEventListener("change", this.checkFields.bind(this));
-      // select.addEventListener("change", this.checkOtherOption.bind(this));
-    });
+      });
 
     document.querySelectorAll("#input").forEach((input) => {
       input.addEventListener("input", this.checkFields.bind(this));
@@ -122,30 +122,11 @@ const appData = {
   },
   showResult: function () {
     this.addPrices();
-
+    totalFull.value = this.fullPrice;
     total.value = this.screenPrice;
     totalOther.value = this.servicePricesPercent + this.servicePricesNumber;
-    this.fullPrice =
-      +this.screenPrice + this.servicePricesNumber + this.servicePricesPercent;
-    totalFull.value = this.fullPrice;
-    this.rollBackTotal =
-      this.fullPrice - this.fullPrice * (this.rollback / 100);
-    totalRollback.value = this.rollBackTotal;
-
-    totalRollback.value = this.rollBackTotal;
+    totalRollback.value = Math.round(this.rollBackTotal);
     totalCount.value = this.count;
-
-    let selectWP = document.getElementById("cms-select");
-    selectWP.addEventListener("change", (event) => {
-      const select = event.target.value;
-
-      if (select === "50") {
-        this.fullPrice *= 1.5;
-        totalFull.value = this.fullPrice;
-      } else {
-        totalFull.value = this.fullPrice;
-      }
-    });
   },
   addScreens: function () {
     screens = document.querySelectorAll(".screen");
@@ -187,7 +168,7 @@ const appData = {
       hiddenCmsVariants.style.display = "none";
     }
   },
-  checkOtherOption: function () {
+  checkSelectOption: function () {
     let selectOther = document.getElementById("cms-select");
     selectOther.addEventListener("change", (event) => {
       const select = event.target.value;
@@ -196,20 +177,13 @@ const appData = {
       } else {
         mainControlsInput.style.display = "none";
       }
+      if (select === "50") {
+        this.multiplier = 1.5;
+      } else {
+        this.multiplier = null;
+      }
     });
   },
-
-  //  checkOtherOption: function () {
-  //    let selectOther = document.getElementById("#cms-select");
-  //  selectOther.forEach((select) => {
-  //       console.log(select.value)
-  //        if (selectOther.value === "other") {
-  //            mainControlsInput.style.display = 'block';
-  //        } else {
-  //            mainControlsInput.style.display = 'none';
-  // }
-  //  });
-  //},
   addServices: function () {
     percentItems.forEach((item) => {
       const check = item.querySelector("input[type=checkbox]");
@@ -242,6 +216,7 @@ const appData = {
   },
 
   addPrices: function () {
+    this.checkSelectOption();
     this.screenPrice = 0;
     this.servicePricesPercent = 0;
     this.servicePricesNumber = 0;
@@ -255,6 +230,20 @@ const appData = {
       this.servicePricesPercent +=
         this.screenPrice * (this.servicesPercent[key] / 100);
     }
+    if (this.multiplier) {
+      this.fullPriceSum =
+        +this.screenPrice + this.servicePricesNumber + this.servicePricesPercent;
+      this.fullPrice = this.fullPriceSum * this.multiplier;
+      this.rollBackTotal =
+        this.fullPrice - this.fullPrice * (this.rollback / 100);
+    } else { 
+      this.fullPrice =
+      +this.screenPrice + this.servicePricesNumber + this.servicePricesPercent;
+    this.rollBackTotal =
+  this.fullPrice - this.fullPrice * (this.rollback / 100);
+    }
+   
+  
   },
 };
 appData.init();
