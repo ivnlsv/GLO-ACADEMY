@@ -32,6 +32,7 @@ const appData = {
   rollBackTotal: 0,
   servicePricesPercent: 0,
   servicePricesNumber: 0,
+  fullPriceSum: 0,
   fullPrice: 0,
   servicePercentPrices: 0,
   servicesPercent: {},
