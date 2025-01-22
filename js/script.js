@@ -20,6 +20,7 @@ const otherOption = document.querySelector('option[value="other"]');
 const mainControlsInput = document.querySelector(
   ".hidden-cms-variants .main-controls__input"
 );
+const otherInput = document.getElementById("cms-other-input");
 
 const appData = {
   title: "",
@@ -27,6 +28,7 @@ const appData = {
   count: 0,
   adaptive: true,
   multiplier: null,
+  cmsPercent: 0,
   screenPrice: 0,
   rollback: 0,
   rollBackTotal: 0,
@@ -51,7 +53,7 @@ const appData = {
     );
     document.querySelectorAll("#select").forEach((select) => {
       select.addEventListener("change", this.checkFields.bind(this));
-      });
+    });
 
     document.querySelectorAll("#input").forEach((input) => {
       input.addEventListener("input", this.checkFields.bind(this));
@@ -75,23 +77,17 @@ const appData = {
     this.addPrices();
     //appData.logger();
     this.showResult();
-    this.disableInputs();
+
     this.toggleResetBlock();
   },
-  disableInputs: function () {
-    const allInputs = document.querySelectorAll('input[type="text"], select');
-    allInputs.forEach((input) => {
-      input.disabled = true;
-    });
-  },
+
   reset: function () {
     this.resetScreens();
     this.resetCheckBoxes();
     this.resetCalculation();
     this.toggleCalcBlock();
-  
   },
-  resetScreens: function () { 
+  resetScreens: function () {
     this.screens = [];
     document.querySelectorAll("select").forEach((select) => {
       select.disabled = false;
@@ -102,9 +98,8 @@ const appData = {
       input.disabled = false;
       input.value = "";
     });
-
   },
-  resetCheckBoxes: function () { 
+  resetCheckBoxes: function () {
     rangeInput.value = 0;
     spanItem.textContent = "0%";
     const checkboxes = document.querySelectorAll("input[type=checkbox]");
@@ -116,23 +111,25 @@ const appData = {
       }
     });
   },
-  resetCalculation: function () { 
+  resetCalculation: function () {
     this.count = 0;
     this.screenPrice = 0;
     this.rollback = 0;
     this.servicePricesPercent = 0;
     this.servicePricesNumber = 0;
+    this.cmsPercent = 0;
     total.value = "";
     totalOther.value = "";
     totalFull.value = "";
     totalRollback.value = "";
     totalCount.value = "";
+    otherInput.value = "";
   },
-  toggleCalcBlock: function () { 
+  toggleCalcBlock: function () {
     resetButton.style.display = "none";
     calcButton.style.display = "block";
   },
-  toggleResetBlock: function () { 
+  toggleResetBlock: function () {
     calcButton.style.display = "none";
     resetButton.style.display = "block";
   },
@@ -186,10 +183,14 @@ const appData = {
   },
   checkSelectOption: function () {
     let selectOther = document.getElementById("cms-select");
+
     selectOther.addEventListener("change", (event) => {
       const select = event.target.value;
       if (select === "other") {
         mainControlsInput.style.display = "block";
+        otherInput.addEventListener("change", (event) => {
+          this.cmsPercent = +event.target.value;
+        });
       } else {
         mainControlsInput.style.display = "none";
       }
@@ -248,18 +249,29 @@ const appData = {
     }
     if (this.multiplier) {
       this.fullPriceSum =
-        +this.screenPrice + this.servicePricesNumber + this.servicePricesPercent;
+        +this.screenPrice +
+        this.servicePricesNumber +
+        this.servicePricesPercent;
       this.fullPrice = this.fullPriceSum * this.multiplier;
       this.rollBackTotal =
         this.fullPrice - this.fullPrice * (this.rollback / 100);
-    } else { 
+    } else if (this.cmsPercent) {
+      this.fullPriceSum =
+        +this.screenPrice +
+        this.servicePricesNumber +
+        this.servicePricesPercent;
       this.fullPrice =
-      +this.screenPrice + this.servicePricesNumber + this.servicePricesPercent;
-    this.rollBackTotal =
-  this.fullPrice - this.fullPrice * (this.rollback / 100);
+        this.fullPriceSum * (this.cmsPercent / 100) + this.fullPriceSum;
+      this.rollBackTotal =
+        this.fullPrice - this.fullPrice * (this.rollback / 100);
+    } else {
+      this.fullPrice =
+        +this.screenPrice +
+        this.servicePricesNumber +
+        this.servicePricesPercent;
+      this.rollBackTotal =
+        this.fullPrice - this.fullPrice * (this.rollback / 100);
     }
-   
-  
   },
 };
 appData.init();
