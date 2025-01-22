@@ -76,8 +76,7 @@ const appData = {
     //appData.logger();
     this.showResult();
     this.disableInputs();
-    calcButton.style.display = "none";
-    resetButton.style.display = "block";
+    this.toggleResetBlock();
   },
   disableInputs: function () {
     const allInputs = document.querySelectorAll('input[type="text"], select');
@@ -86,28 +85,26 @@ const appData = {
     });
   },
   reset: function () {
+    this.resetScreens();
+    this.resetCheckBoxes();
+    this.resetCalculation();
+    this.toggleCalcBlock();
+  
+  },
+  resetScreens: function () { 
     this.screens = [];
-    this.count = 0;
-    this.screenPrice = 0;
-    this.rollback = 0;
-    this.servicePricesPercent = 0;
-    this.servicePricesNumber = 0;
-
     document.querySelectorAll("select").forEach((select) => {
       select.disabled = false;
       select.selectedIndex = 0;
     });
 
-    document.querySelectorAll("input[type='text']").forEach((input) => {
+    document.querySelectorAll("#input").forEach((input) => {
       input.disabled = false;
       input.value = "";
     });
 
-    total.value = "";
-    totalOther.value = "";
-    totalFull.value = "";
-    totalRollback.value = "";
-    totalCount.value = "";
+  },
+  resetCheckBoxes: function () { 
     rangeInput.value = 0;
     spanItem.textContent = "0%";
     const checkboxes = document.querySelectorAll("input[type=checkbox]");
@@ -118,8 +115,26 @@ const appData = {
         mainControlsInput.style.display = "none";
       }
     });
+  },
+  resetCalculation: function () { 
+    this.count = 0;
+    this.screenPrice = 0;
+    this.rollback = 0;
+    this.servicePricesPercent = 0;
+    this.servicePricesNumber = 0;
+    total.value = "";
+    totalOther.value = "";
+    totalFull.value = "";
+    totalRollback.value = "";
+    totalCount.value = "";
+  },
+  toggleCalcBlock: function () { 
     resetButton.style.display = "none";
     calcButton.style.display = "block";
+  },
+  toggleResetBlock: function () { 
+    calcButton.style.display = "none";
+    resetButton.style.display = "block";
   },
   showResult: function () {
     this.addPrices();
