@@ -77,10 +77,8 @@ const appData = {
     this.addPrices();
     //appData.logger();
     this.showResult();
-
     this.toggleResetBlock();
   },
-
   reset: function () {
     this.resetScreens();
     this.resetCheckBoxes();
@@ -93,7 +91,6 @@ const appData = {
       select.disabled = false;
       select.selectedIndex = 0;
     });
-
     document.querySelectorAll("#input").forEach((input) => {
       input.disabled = false;
       input.value = "";
